@@ -96,12 +96,9 @@
   <ItemGroup>
     <Folder Include="Assets\" />
   </ItemGroup>
-<<<<<<< HEAD
   <ItemGroup>
     <Content Include="ms-cab-compressed.ico" />
   </ItemGroup>
-=======
->>>>>>> 92b6a9c7104098302256d828c81fdd1c1777f844
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
