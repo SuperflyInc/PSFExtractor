@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PSFExtractor.PackCab;
+using System;
 using System.Collections;
 using System.IO;
 
@@ -8,19 +9,25 @@ namespace PSFExtractor
     {
         static int Main(string[] args)
         {
-            Console.WriteLine("PSFExtractor v1.07a (Sep 16 2021) by th1r5bvn23 & abbodi1406\nVisit https://www.betaworld.cn/\n");
+            Console.WriteLine("PSFExtractor by th1r5bvn23, abbodi1406 - v1.0.8.0 modified by Superfly\nVisit https://www.betaworld.cn/\n");
             if (args.Length != 1)
             {
                 PrintHelp();
                 return 0;
             }
-            string CABFileName = args[0];
+            string[] strArray = args[0].Split('_');
+            if (strArray.Length > 1)
+                RenameFiles();
+            string CABFileName = strArray.Length > 1 ? strArray[0] + ".cab" : args[0];
+            string PSFFileName = CABFileName.Replace(".cab", ".psf");
+
             if (!File.Exists(CABFileName))
             {
                 PrintError(1);
                 return 1;
             }
-            string DirectoryName = CABFileName.Substring(0, CABFileName.LastIndexOf('.'));
+            string directoryRoot = Directory.GetDirectoryRoot(CABFileName);
+            string DirectoryName = Path.Combine(directoryRoot, "Extracted", Path.GetFileNameWithoutExtension(CABFileName));
             try
             {
                 Directory.CreateDirectory(DirectoryName);
@@ -30,7 +37,7 @@ namespace PSFExtractor
                 PrintError(2);
                 return 1;
             }
-            string PSFFileName = DirectoryName + ".psf";
+
             if (!File.Exists(PSFFileName))
             {
                 PrintError(3);
@@ -65,6 +72,25 @@ namespace PSFExtractor
                 PrintError(6);
                 return 1;
             }
+            try
+            {
+                CreateCab createCab = new CreateCab();
+                string withoutExtension = Path.GetFileNameWithoutExtension(CABFileName);
+                string path1 = Directory.CreateDirectory(CABFileName.Substring(0, CABFileName.LastIndexOf('.'))).ToString();
+                createCab.RunPackMethod(Path.Combine(path1, withoutExtension + ".cab"), DirectoryName);
+                if (Directory.Exists(Path.Combine(directoryRoot, "Extracted")))
+                    Directory.Delete(Path.Combine(directoryRoot, "Extracted"), true);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                Program.PrintError(7);
+                return 1;
+            }
+
+
+
+
             PrintError(0);
             return 0;
         }
@@ -87,6 +113,18 @@ namespace PSFExtractor
                               "                   Default value is RAW.\n");
             */
             Console.WriteLine("Usage: PSFExtractor.exe <CAB file>\n");
+        }
+        private static void RenameFiles()
+        {
+            foreach (string file in Directory.GetFiles(Directory.GetCurrentDirectory()))
+            {
+                if (Path.GetExtension(file) == ".cab" || Path.GetExtension(file) == ".psf")
+                {
+                    string[] strArray = Path.GetFileNameWithoutExtension(file).Split('_');
+                    string destFileName = file.Replace("_" + strArray[1], string.Empty);
+                    File.Move(file, destFileName);
+                }
+            }
         }
 
         static void PrintError(int ErrorCode)

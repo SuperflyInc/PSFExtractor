@@ -60,6 +60,12 @@
   <PropertyGroup>
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>ms-cab-compressed.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>PSFExtractor.Program</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Deployment.Compression, Version=3.0.0.0, Culture=neutral, PublicKeyToken=ce35f76fcda82bad, processorArchitecture=MSIL">
       <HintPath>packages\MSFTCompressionCab.1.0.0\lib\Microsoft.Deployment.Compression.dll</HintPath>
@@ -90,6 +96,12 @@
   <ItemGroup>
     <Folder Include="Assets\" />
   </ItemGroup>
+<<<<<<< HEAD
+  <ItemGroup>
+    <Content Include="ms-cab-compressed.ico" />
+  </ItemGroup>
+=======
+>>>>>>> 92b6a9c7104098302256d828c81fdd1c1777f844
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
