@@ -1,7 +1,7 @@
 # PSFExtractor
 Extract CAB+PSF update for Windows 10/11.
 
-Usage: PSFExtractor.exe <CABFILE>
+Usage: PSFExtractor.exe CABFILE
 
 You need to put the CAB file alongside its corresponding PSF file. 
   
