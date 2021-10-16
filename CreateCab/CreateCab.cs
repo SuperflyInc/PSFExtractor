@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-﻿using Microsoft.Deployment.Compression;
+using Microsoft.Deployment.Compression;
 using Microsoft.Deployment.Compression.Cab;
 using System;
 
@@ -24,18 +23,3 @@ namespace PSFExtractor.PackCab
         }
     }
 }
-
-=======
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PSFExtractor.CreateCab
-{
-    class CreateCab
-    {
-    }
-}
->>>>>>> 92b6a9c7104098302256d828c81fdd1c1777f844
