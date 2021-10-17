@@ -18,7 +18,7 @@ namespace PSFExtractor
             string[] strArray = args[0].Split('_');
             if (strArray.Length > 1)
                     RenameFiles();
-            string CABFileName = strArray.Length > 1 ? strArray[0] + ".cab" : args[0];
+            string CABFileName = strArray.Length > 1 ? string.Concat(strArray[0] , ".cab") : args[0];
             string PSFFileName = CABFileName.Replace(".cab", ".psf");
 
             if (!File.Exists(CABFileName))

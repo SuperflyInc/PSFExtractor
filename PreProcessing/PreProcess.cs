@@ -13,7 +13,7 @@ namespace PSFExtractor.PreProcessing
         public static decimal Prog { get => progess; set => progess = value; }
         private static void ProgressHandler(object source, ArchiveProgressEventArgs e)
         {
-            //CurrentFileNumber is zero-based.
+            //CurrentFileNumber is zero-based - increment by 1 to enable proper calculation.
             Prog = Decimal.Divide((decimal)e.CurrentFileNumber + 1, (decimal)e.TotalFiles) * 100;
             Console.SetCursorPosition(left, top);
             Console.CursorVisible = false;
@@ -32,6 +32,7 @@ namespace PSFExtractor.PreProcessing
                 left = Console.CursorLeft;
                 top = Console.CursorTop;
                 cabInfo.Unpack(DirectoryName, ProgressHandler);
+                Console.CursorVisible = true;
                 Console.WriteLine();
             }
         }
