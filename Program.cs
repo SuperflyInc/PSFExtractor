@@ -9,7 +9,7 @@ namespace PSFExtractor
     {
         static int Main(string[] args)
         {
-            Console.WriteLine("PSFExtractor by th1r5bvn23, abbodi1406 - v1.0.8.0 modified by Superfly\nVisit https://www.betaworld.cn/\n");
+            Console.WriteLine("PSFExtractor by th1r5bvn23, abbodi1406 - v1.0.8.1 modified by Superfly\nVisit https://www.betaworld.cn/\n");
             if (args.Length != 1)
             {
                 PrintHelp();
@@ -17,7 +17,7 @@ namespace PSFExtractor
             }
             string[] strArray = args[0].Split('_');
             if (strArray.Length > 1)
-                RenameFiles();
+                    RenameFiles();
             string CABFileName = strArray.Length > 1 ? strArray[0] + ".cab" : args[0];
             string PSFFileName = CABFileName.Replace(".cab", ".psf");
 
@@ -32,7 +32,7 @@ namespace PSFExtractor
             {
                 Directory.CreateDirectory(DirectoryName);
             }
-            catch(Exception e)
+            catch(Exception)
             {
                 PrintError(2);
                 return 1;
@@ -47,7 +47,7 @@ namespace PSFExtractor
             {
                 PreProcessing.PreProcess.Process(CABFileName, DirectoryName);
             }
-            catch(Exception e)
+            catch(Exception)
             {
                 PrintError(4);
                 return 1;
@@ -57,7 +57,7 @@ namespace PSFExtractor
             {
                 SplitPSF.GenerateFileList.Generate(PSFFileName, DirectoryName);
             }
-            catch(Exception e)
+            catch(Exception)
             {
                 PrintError(5);
                 return 1;
@@ -88,9 +88,6 @@ namespace PSFExtractor
                 return 1;
             }
 
-
-
-
             PrintError(0);
             return 0;
         }
@@ -116,6 +113,7 @@ namespace PSFExtractor
         }
         private static void RenameFiles()
         {
+            //UUP dump file names have a partial checksum suffix - remove that.
             foreach (string file in Directory.GetFiles(Directory.GetCurrentDirectory()))
             {
                 if (Path.GetExtension(file) == ".cab" || Path.GetExtension(file) == ".psf")
