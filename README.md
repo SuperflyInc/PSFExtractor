@@ -9,4 +9,4 @@ After that you'll get an installable CAB file. You can use it with dism /online 
 
 The tool requires .NET Framework 4.8 and Windows 7 or above.
 
-Supports any Windows 10/11 CU updates. (which can be downlowded with the UUPDump tool)
+Supports any Windows 10/11 CU updates. (which can be downloaded with the UUPDump tool)
