@@ -1,4 +1,5 @@
 ﻿using PSFExtractor.PackCab;
+using PSFExtractor.PreProcessing;
 using System;
 using System.Collections;
 using System.IO;
@@ -45,9 +46,10 @@ namespace PSFExtractor
             }
             try
             {
-                PreProcessing.PreProcess.Process(CABFileName, DirectoryName);
+                PreProcess preProcess = PreProcess();
+                preProcess.Process(CABFileName, DirectoryName);
             }
-            catch(Exception)
+            catch (Exception)
             {
                 PrintError(4);
                 return 1;
@@ -79,7 +81,14 @@ namespace PSFExtractor
                 string path1 = Directory.CreateDirectory(CABFileName.Substring(0, CABFileName.LastIndexOf('.'))).ToString();
                 createCab.RunPackMethod(Path.Combine(path1, withoutExtension + ".cab"), DirectoryName);
                 if (Directory.Exists(Path.Combine(directoryRoot, "Extracted")))
+                {
+                    Console.Write("Deleting extracted files ... ");
+
                     Directory.Delete(Path.Combine(directoryRoot, "Extracted"), true);
+                }
+                Console.Write("OK");
+                Console.WriteLine();
+
             }
             catch (Exception ex)
             {
@@ -90,6 +99,11 @@ namespace PSFExtractor
 
             PrintError(0);
             return 0;
+        }
+
+        private static PreProcess PreProcess()
+        {
+            return new PreProcessing.PreProcess();
         }
 
         static void PrintHelp()
@@ -152,5 +166,6 @@ namespace PSFExtractor
                     break;
             }
         }
+
     }
 }

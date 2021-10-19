@@ -1,6 +1,7 @@
 using Microsoft.Deployment.Compression;
 using Microsoft.Deployment.Compression.Cab;
 using System;
+using System.Linq;
 
 namespace PSFExtractor.PackCab
 {
@@ -39,5 +40,6 @@ namespace PSFExtractor.PackCab
             }
             return false;
         }
+
     }
 }
